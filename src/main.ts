@@ -6,8 +6,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('ToDo List API')
-    .setDescription('API REST para gestión de tareas')
+    .setTitle('ToDo List API 1234567')
+    .setDescription('Mamalo ToDo List API Documentation')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
