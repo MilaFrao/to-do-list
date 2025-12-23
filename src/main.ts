@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('ToDo List API 1234567')
-    .setDescription('Mamalo ToDo List API Documentation')
+    .setDescription('MamaloP ToDo List API Documentation')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
