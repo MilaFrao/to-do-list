@@ -7,49 +7,10 @@ datasource db {
   provider = "postgresql"
 }
 
-model categorias {
-  id          Int      @id @default(autoincrement())
-  nombre      String   @db.VarChar(150)
-  descripcion String?  @db.VarChar(250)
-  color       String   @db.VarChar(50)
-  tareas      tareas[]
-}
-
-model comentarios {
-  id               Int       @id @default(autoincrement())
-  contenido        String
-  fecha_comentario DateTime? @default(now()) @db.Timestamp(6)
-  id_usuario       Int
-  id_tarea         Int
-  usuarios         usuarios  @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comentario_de_usuario")
-  tareas           tareas    @relation(fields: [id_tarea], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tarea_comentada")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model tareas {
-  id                                    Int           @id @default(autoincrement())
-  titulo                                String        @db.VarChar(150)
-  descripcion                           String?
-  story_points                          Int?
-  fecha_entrega                         DateTime?     @db.Date
-  estado                                String?       @default("pendiente") @db.VarChar(30)
-  id_creador                            Int
-  id_asignado                           Int?
-  id_categorias                         Int?
-  fecha_creacion                        DateTime?     @default(now()) @db.Timestamp(6)
-  comentarios                           comentarios[]
-  usuarios_tareas_id_asignadoTousuarios usuarios?     @relation("tareas_id_asignadoTousuarios", fields: [id_asignado], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_asignado")
-  categorias                            categorias?   @relation(fields: [id_categorias], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_categorias")
-  usuarios_tareas_id_creadorTousuarios  usuarios      @relation("tareas_id_creadorTousuarios", fields: [id_creador], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_creador")
-}
-
 model usuarios {
-  id                                  Int           @id @default(autoincrement())
-  nombre                              String        @db.VarChar(100)
-  email                               String        @unique @db.VarChar(150)
-  contrasena                          String        @db.VarChar(250)
-  fecha_de_registro                   DateTime?     @default(now()) @db.Timestamp(6)
-  comentarios                         comentarios[]
-  tareas_tareas_id_asignadoTousuarios tareas[]      @relation("tareas_id_asignadoTousuarios")
-  tareas_tareas_id_creadorTousuarios  tareas[]      @relation("tareas_id_creadorTousuarios")
+  id                Int       @id @default(autoincrement())
+  nombre            String    @db.VarChar(150)
+  email             String    @db.VarChar(150)
+  contrasena        String    @db.VarChar(250)
+  fecha_de_registro DateTime? @default(now()) @db.Timestamp(6)
 }
