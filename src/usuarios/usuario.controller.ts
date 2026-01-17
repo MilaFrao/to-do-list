@@ -1,5 +1,6 @@
 import { Controller, Delete, Get, Patch, Post, Put } from "@nestjs/common";
 import { UsuarioService } from "./usuario.service";
+import { CrearUsuarioDto } from "./dto/crear-usuario.dto";
 
 @Controller({})
 export class UsuarioController {
